@@ -4,10 +4,10 @@ fun main() {
     fun part1(input: List<String>): Int {
         val s1 = mutableListOf<Int>()
         val s2 = mutableListOf<Int>()
-        input.forEach { x ->
-            x.split(Regex("\\s+")) // Split the line by whitespace
-                .map(String::toInt) // Convert strings to integers
-                .let { (e1, e2) -> s1.add(e1); s2.add(e2) } // Add to respective lists
+        input.forEach { line ->
+            line.split(Regex("\\s+"))                   // Split the line by whitespace
+                .map(String::toInt)                     // Convert strings to integers
+                .let { (a, b) -> s1.add(a); s2.add(b) } // Add to respective lists
         }
 
         s1.sort() // Sort the first list
@@ -20,13 +20,19 @@ fun main() {
         return input.size
     }
 
-    // Or read a large test input from the `src/Day01_test.txt` file:
+    // Read a test input from the `src/Day01_test.txt` file:
     val testInput = readInput("Day01_test")
-    println(part1(testInput))
-    check(part1(testInput) == 11)
+    part1(testInput).let {
+        println(it)
+        check(it == 11)
+    }
 
     // Read the input from the `src/Day01.txt` file.
     val input = readInput("Day01")
-    part1(input).println()
+    part1(input).let {
+        println(it)
+        check(it == 1651298)
+    }
+
 //    part2(input).println()
 }
