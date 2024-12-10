@@ -1,6 +1,8 @@
+import org.jetbrains.annotations.TestOnly
 import kotlin.math.absoluteValue
 
 fun main() {
+
     fun part1(input: List<String>): Int {
         val s1 = mutableListOf<Int>()
         val s2 = mutableListOf<Int>()
@@ -17,7 +19,14 @@ fun main() {
     }
 
     fun part2(input: List<String>): Int {
-        return input.size
+        val s1 = mutableListOf<Int>()
+        val s2 = mutableListOf<Int>()
+        input.forEach { line ->
+            line.split(Regex("\\s+"))                   // Split the line by whitespace
+                .map(String::toInt)                     // Convert strings to integers
+                .let { (a, b) -> s1.add(a); s2.add(b) } // Add to respective lists
+        }
+        return s1.sumOf { s -> s * s2.count { n -> n == s } }
     }
 
     // Read a test input from the `src/Day01_test.txt` file:
@@ -34,5 +43,18 @@ fun main() {
         check(it == 1651298)
     }
 
-//    part2(input).println()
+    // Read a test input from the `src/Day01_test.txt` file:
+    val testInput2 = readInput("Day01_test")
+    part2(testInput2).let {
+        println(it)
+        check(it == 31)
+    }
+
+    // Read the input from the `src/Day01.txt` file.
+    val input2 = readInput("Day01")
+    part2(input2).let {
+        println(it)
+        check(it == 21306195)
+    }
+
 }
